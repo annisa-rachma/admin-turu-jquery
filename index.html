@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="IDEA Admin Panel" />
+    <meta name="author" content="Ziady Mubaraq" />
+    <link
+      href="./image/IDEA_logo.svg"
+      type="image/x-icon"
+      rel="shortcut icon"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,600,0,0"
+      rel="stylesheet"
+    />
+    <link href="./css/style.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <title>IDEA - Admin Panel</title>
+  </head>
+
+  <body>
+    <!-- Preloader -->
+    <div id="preloader" style="display: none">
+      <div class="loading">
+        <lottie-player
+          src="https://assets2.lottiefiles.com/packages/lf20_remmdtqv.json"
+          background="transparent"
+          speed="1"
+          style="width: 300px; height: 300px"
+          loop
+          autoplay
+        ></lottie-player>
+      </div>
+    </div>
+    <!-- End Preloader -->
+
+    <!-- Navbar -->
+    <header
+      class="navbar sticky-top bg-white flex-md-nowrap p-0 shadow"
+      id="navbar"
+    >
+      <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6">
+        <img
+          src="./image/IDEA_logo.svg"
+          width="80"
+          class="d-inline-block me-2"
+          alt="IDEA"
+        />Admin Panel</a
+      >
+      <button
+        class="navbar-toggler position-absolute d-md-none collapsed"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#sidebar-menu"
+        aria-controls="sidebar-menu"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </header>
+    <!-- End Navbar -->
+
+    <!-- Login Section -->
+    <section class="container" id="login-section" style="display: none">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h1 class="mb-3 mt-5">Login Options</h1>
+          <span
+            >Log in and autocomplete your order with your personal data, or sign
+            up to enjoy all the benefits of an IDEA account.</span
+          >
+        </div>
+        <div class="col-12 col-lg-8 offset-lg-2 my-5">
+          <div class="row">
+            <div class="col-12 col-md-6 border-end p-5 text-left">
+              <div class="form-signin m-auto">
+                <form id="register-form">
+                  <h1 class="h3 mb-3 display-1">Sign up and enjoy</h1>
+                  <div class="mb-3">
+                    <div class="d-flex justify-content-between">
+                      <label for="register-username">Username</label>
+                      <label class="text-danger text-end fw-bold">*</label>
+                    </div>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="register-username"
+                      placeholder="Enter your username ..."
+                      autocomplete="off"
+                      required
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <div class="d-flex justify-content-between">
+                      <label for="register-email">Email</label>
+                      <label class="text-danger text-end fw-bold">*</label>
+                    </div>
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="register-email"
+                      placeholder="Enter email address ..."
+                      autocomplete="off"
+                      required
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <div class="d-flex justify-content-between">
+                      <label for="register-password">Password</label>
+                      <label class="text-danger text-end fw-bold">*</label>
+                    </div>
+                    <input
+                      type="password"
+                      class="form-control"
+                      id="register-password"
+                      placeholder="Enter your password ..."
+                      autocomplete="off"
+                      required
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label for="register-phone">Phone Number</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="register-phone"
+                      placeholder="Enter phone number (optional) ..."
+                      autocomplete="off"
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label for="register-address">Address</label>
+                    <textarea
+                      id="register-address"
+                      class="form-control"
+                      rows="3"
+                      placeholder="Enter your address (optional) ..."
+                      autocomplete="off"
+                    ></textarea>
+                  </div>
+                  <button
+                    class="btn btn-lg btn-primary rounded-pill w-100 p-2 mt-3"
+                    type="submit"
+                  >
+                    Sign Up
+                  </button>
+                </form>
+              </div>
+            </div>
+            <div class="col-12 col-md-6 p-5 text-left">
+              <div class="form-signin m-auto">
+                <form id="login-form">
+                  <h1 class="h3 mb-3 display-1">Log in to your account</h1>
+                  <span
+                    >Log in on your profile to autocomplete your purchase order
+                    with your personal data.</span
+                  >
+                  <div class="mb-3 mt-3">
+                    <div class="d-flex justify-content-between">
+                      <label for="login-email">Email</label>
+                      <label class="text-danger text-end fw-bold">*</label>
+                    </div>
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="login-email"
+                      placeholder="Enter email address ..."
+                      autocomplete="off"
+                      required
+                    />
+                  </div>
+                  <div class="mb-4">
+                    <div class="d-flex justify-content-between">
+                      <label for="login-password">Password</label>
+                      <label class="text-danger text-end fw-bold">*</label>
+                    </div>
+                    <input
+                      type="password"
+                      class="form-control"
+                      id="login-password"
+                      placeholder="Enter your password ..."
+                      autocomplete="off"
+                      required
+                    />
+                  </div>
+                  <button
+                    class="btn btn-lg btn-primary rounded-pill w-100 p-2"
+                    type="submit"
+                  >
+                    Log In
+                  </button>
+                  <div id="buttonDiv" style="margin-top:25px; width:auto"></div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Login Section -->
+
+    <!-- Home Section -->
+    <section class="container-fluid" id="home-section" style="display: none">
+      <div class="row">
+        <!-- Sidebar -->
+        <nav
+          class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse"
+          id="sidebar-menu"
+          style="display: none"
+        >
+          <div class="position-sticky pt-3">
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link active fw-bold" href="" id="nav-dashboard">
+                  <span class="icon material-symbols-outlined me-2"
+                    >shopping_cart</span
+                  >Dashboard</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="" id="nav-lodging">
+                  <span class="icon material-symbols-outlined me-2"
+                    >shopping_bag</span
+                  >Lodgings</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="" id="nav-type">
+                  <span class="icon material-symbols-outlined me-2"
+                    >category</span
+                  >Types</a
+                >
+              </li>
+            </ul>
+            <h6
+              class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase"
+            >
+              <span>Account</span>
+            </h6>
+            <ul class="nav flex-column mb-2">
+              <li class="nav-item">
+                <a class="nav-link">
+                  <span class="icon material-symbols-outlined me-2">person</span
+                  >Hej, <span id="username"></span></a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="" id="nav-logout">
+                  <span class="icon material-symbols-outlined me-2">logout</span
+                  >Logout</a
+                >
+              </li>
+            </ul>
+          </div>
+        </nav>
+        <!-- End Sidebar -->
+
+        <!-- Dashboard Section -->
+        <section
+          class="col-md-9 ms-sm-auto col-lg-10 px-md-4"
+          id="dashboard-section"
+          style="display: none"
+        >
+          <div
+            class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
+          >
+            <h1 class="display-2">Dashboard</h1>
+          </div>
+          <div class="row">
+            <div class="col-12 col-md-6">
+              <div class="row">
+                <div class="col-12 col-md-6 mb-3">
+                  <div class="card">
+                    <div class="card-body">
+                      <h6 class="card-subtitle mb-2 text-muted">
+                        Total Lodgings
+                      </h6>
+                      <h6 class="card-title card-number" id="total-lodging">
+                      </h6>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-md-6 mb-3">
+                  <div class="card">
+                    <div class="card-body">
+                      <h6 class="card-subtitle mb-2 text-muted">
+                        Total Types
+                      </h6>
+                      <h6 class="card-title card-number" id="total-type">
+                      </h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- End Dashboard Section -->
+
+        <!-- Lodging Section -->
+        <section
+          class="col-md-9 ms-sm-auto col-lg-10 px-md-4"
+          id="lodging-section"
+          style="display: none"
+        >
+          <div
+            class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
+          >
+            <h1 class="display-2">Lodgings</h1>
+            <button class="btn btn-primary rounded-pill" id="new-lodging" >
+              <span class="icon material-symbols-outlined">add</span>New Lodging
+            </button>
+          </div>
+          <div class="row">
+            <div class="col-12 table-responsive">
+              <table class="table align-middle">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col" width="180px">Name</th>
+                    <th scope="col" width="180px">Location</th>
+                    <th scope="col" width="400px">Image</th>
+                    <th scope="col" width="180px">Facility</th>
+                    <th scope="col" >Room Capacity</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Author</th>
+                    <th scope="col" width="50px"></th>
+                  </tr>
+                </thead>
+                <tbody id="table-lodging"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+        <!-- End Lodging Section -->
+
+        <!-- New Lodging Section -->
+        <section
+          class="col-md-9 ms-sm-auto col-lg-10 px-md-4"
+          id="new-lodging-section"
+          style="display: none"
+        >
+          <div
+            class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
+          >
+            <h1 class="display-2">New Lodging</h1>
+          </div>
+          <div class="row">
+            <div class="col-12 col-md-6">
+              <form id="lodging-form">
+                <div class="mb-3">
+                  <label for="lodging-name"
+                    >Name <span class="text-danger fw-bold">*</span></label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="lodging-name"
+                    placeholder="Enter lodging name"
+                    autocomplete="off"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="lodging-location"
+                    >Location
+                    <span class="text-danger fw-bold">*</span></label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="lodging-location"
+                    placeholder="Enter lodging location"
+                    autocomplete="off"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="lodging-type"
+                    >Type <span class="text-danger fw-bold">*</span></label
+                  >
+                  <select id="lodging-type" class="form-select" required>
+                    <option value="" selected disabled>
+                      -- Select Type --
+                    </option>
+                    <option value="" id="optionType"></option>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="lodging-facility"
+                    >Facility
+                    <span class="text-danger fw-bold">*</span></label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="lodging-facility"
+                    placeholder="Enter lodging facility"
+                    autocomplete="off"
+                    required
+                  />
+                </div>
+                <div class="row">
+                  <div class="col-12 col-md-6">
+                    <div class="mb-3">
+                      <label for="lodging-roomCapacity"
+                        >Room Capacity <span class="text-danger fw-bold">*</span></label
+                      >
+                      <input
+                        type="number"
+                        min="0"
+                        class="form-control"
+                        id="lodging-roomCapacity"
+                        placeholder="Enter Room Capacity"
+                        autocomplete="off"
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <div class="mb-3">
+                      <label for="lodging-price"
+                        >Price <span class="text-danger fw-bold">*</span></label
+                      >
+                      <input
+                        type="number"
+                        min="0"
+                        class="form-control"
+                        id="lodging-price"
+                        placeholder="Enter lodging price"
+                        autocomplete="off"
+                        required
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="lodging-imgUrl"
+                    >Image <span class="text-danger fw-bold">*</span></label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="lodging-imgUrl"
+                    placeholder="Enter lodging image url"
+                    autocomplete="off"
+                    required
+                  />
+                </div>
+                <div class="row mt-5 mb-3">
+                  <div class="col-6">
+                    <a
+                      class="btn btn-lg btn-light rounded-pill w-100 p-2"
+                      href=""
+                      >Cancel</a
+                    >
+                  </div>
+                  <div class="col-6">
+                    <button
+                      class="btn btn-lg btn-primary rounded-pill w-100 p-2"
+                      type="submit"
+                      href=""
+                    >
+                      Submit
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </section>
+        <!-- End New Lodging Section -->
+
+        <!-- Type Section -->
+        <section
+          class="col-md-9 ms-sm-auto col-lg-10 px-md-4"
+          id="type-section"
+          style="display: none"
+        >
+          <div
+            class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
+          >
+            <h1 class="display-2">Types</h1>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                  </tr>
+                </thead>
+                <tbody id="table-type">
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+        <!-- End Type Section -->
+
+      </div>
+    </section>
+    <!-- End Home Section -->
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+      crossorigin="anonymous"
+    ></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="https://accounts.google.com/gsi/client" async></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <script>
+      const BASE_URL = 'https://server-turu.annisa-rachma.com'
+
+      function showUser() {
+        let username = localStorage.getItem("username")
+        let html = `${username}`
+        
+        $("#username").html(html)
+      }
+
+      async function dashboardSection() {
+        try {
+          const lodgings = await $.ajax({
+            method: "GET",
+            url: `${BASE_URL}/lodgings`,
+            headers: {
+              access_token: localStorage.getItem("access_token")
+            }
+          });
+          const types = await $.ajax({
+            method: "GET",
+            url: `${BASE_URL}/types`,
+            headers: {
+              access_token: localStorage.getItem("access_token")
+            }
+          });
+
+          let htmlLodging = `${lodgings.lodging.length}`
+          let htmlType = `${types.type.length}`
+
+          $("#total-lodging").html(htmlLodging)
+          $("#total-type").html(htmlType)
+
+        } catch (err) {
+          console.log(err)
+        }
+      }
+
+      async function deleteLodging(lodgingId) {
+        try {
+          await $.ajax({
+            method: "DELETE",
+            url: `${BASE_URL}/lodgings/` + lodgingId,
+            headers: {
+              access_token: localStorage.getItem("access_token")
+            }
+          });
+          Toastify({
+              text: `Delete successful!`,
+              duration: 3000,
+              close: true,
+              style: {
+                background: "red",
+              },
+              onClick: function(){} 
+            }).showToast()
+          fetchLodgings()
+        } catch (err) {
+          console.log(err)
+          Toastify({
+            text: `${err.responseJSON.message}`,
+            duration: 3000,
+            close: true,
+            style: {
+              background: "red",
+            },
+            onClick: function(){} 
+          }).showToast()
+        }
+      }
+
+      function rupiah(number){
+        const convert = new Intl.NumberFormat("id-ID", {
+          style: "currency",
+          currency: "IDR"
+        }).format(number);
+        return convert;
+      }
+
+      async function fetchLodgings() {
+        try {
+          const lodgings = await $.ajax({
+            method: "GET",
+            url: `${BASE_URL}/lodgings`,
+            headers: {
+              access_token: localStorage.getItem("access_token")
+            }
+          });
+          
+          let html = ``
+          lodgings.lodging.forEach((lodging, idx) => {
+            let price = rupiah(lodging.price)
+            html += /*html*/ `
+              <tr>
+                    <td scope="row">${idx+1}</td>
+                    <td class="fw-bold">${lodging.name}</td>
+                    <td>${lodging.location}</td>
+                    <td>
+                      <img
+                        src="${lodging.imgUrl}"
+                        class="img-fluid"
+                      />
+                    </td>
+                    <td>${lodging.facility}</td>
+                    <td>${lodging.roomCapacity}</td>
+                    <td class="fw-bold">${price}</td>
+                    <td>${lodging.User.username}</td>
+                    <td>
+                      <button onclick="deleteLodging(${lodging.id})" class="btn btn-danger mx-3" type="button" >
+                        Delete
+                      </button>
+                    </td>
+              </tr>
+            `
+          });
+          $("#table-lodging").html(html)
+        } catch (err) {
+          console.log(err)
+        }
+      }
+
+      async function fetchTypes() {
+        try {
+          const types = await $.ajax({
+            method: "GET",
+            url: `${BASE_URL}/types`,
+            headers: {
+              access_token: localStorage.getItem("access_token")
+            }
+          });
+
+          let html= ``
+          types.type.forEach((type, idx) => {
+            html += /*html*/ `
+              <tr>
+                  <td scope="row">#${idx+1}</td>
+                  <td class="fw-bold">${type.name}</td>
+              </tr>
+            `
+          })
+          $("#table-type").html(html)
+        } catch (err) {
+          console.log(err)
+        }
+      }
+
+      async function selectType() {
+        try {
+          const types = await $.ajax({
+            method: "GET",
+            url: `${BASE_URL}/types`,
+            headers: {
+              access_token: localStorage.getItem("access_token")
+            }
+          });
+          
+          let typesArr = types.type
+          let html= `<option value="" selected disabled>
+                      -- Select Type --
+                    </option>`
+          for(let i=0; i<typesArr.length; i++) {
+            html += /*html*/ `
+            <option value="${typesArr[i].id}">${typesArr[i].name}</option>
+            `
+          }
+          $("#lodging-type").html(html)
+
+        } catch (err) {
+          console.log(err)
+        }
+      }
+
+
+      $(document).ready(() => {
+        if(localStorage.getItem("access_token")) {
+          $("#home-section").show();
+          $('#sidebar-menu').show();
+          $('#dashboard-section').show();
+          $('#lodging-section').hide();
+          $('#type-section').hide();
+          dashboardSection() 
+          showUser()
+        } else {
+          $("#login-section").show();
+        }
+
+        window.onload = function () {
+          google.accounts.id.initialize({
+            client_id: "451369076473-95vtql6937n297ck4e6dp94h6dr62tq6.apps.googleusercontent.com",
+            callback: handleCredentialResponse
+          });
+          google.accounts.id.renderButton(
+            document.getElementById("buttonDiv"),
+            { theme: "outline", size: "large" }  // customization attributes
+          );
+          google.accounts.id.prompt(); // also display the One Tap dialog
+        }
+
+        async function handleCredentialResponse(response) {
+          try {
+            // console.log("Encoded JWT ID token: " + response.credential);
+            const data = await $.ajax({
+              url: `${BASE_URL}/google-signin`, 
+              method: "POST",
+              headers: {
+                google_token: response.credential
+              }
+            });
+
+            localStorage.setItem("access_token", data.access_token)
+            localStorage.setItem("id", data.id);
+            localStorage.setItem("username", data.username);
+            $("#login-section").hide();
+            $("#home-section").show();
+            $('#sidebar-menu').show();
+            $('#dashboard-section').show();
+            dashboardSection() 
+            showUser()
+          } catch (err) {
+            console.log(err)
+          }
+        }
+
+        //navigation-dashboard
+        $('#nav-dashboard').click((event) => {
+          event.preventDefault();
+
+          $("#home-section").show();
+          $('#sidebar-menu').show();
+          $('#dashboard-section').show();
+          $('#new-lodging-section').hide();
+          $('#lodging-section').hide();
+          $('#type-section').hide();
+          dashboardSection() 
+        })
+
+        //navigation-lodgings
+        $('#nav-lodging').click((event) => {
+          event.preventDefault();
+
+          $('#dashboard-section').hide();
+          $("#home-section").show();
+          $('#sidebar-menu').show();
+          $('#lodging-section').show();
+          $('#new-lodging-section').hide();
+          $('#type-section').hide();
+          fetchLodgings()
+        })
+
+        //new-lodging
+        $('#new-lodging').click((event) => {
+          event.preventDefault();
+
+          $("#home-section").show();
+          $('#sidebar-menu').show();
+          $('#lodging-section').hide();
+          $('#new-lodging-section').show();
+          $('#new-type-section').hide();
+          selectType()
+        })
+
+        //add new lodging
+        $("#lodging-form").submit(async (event) => {
+          event.preventDefault();
+          const name = $('#lodging-name').val();
+          const typeId = $('#lodging-type').val();
+          const facility = $('#lodging-facility').val();
+          const roomCapacity = $('#lodging-roomCapacity').val();
+          const price = $('#lodging-price').val();
+          const imgUrl = $('#lodging-imgUrl').val();
+          const location = $('#lodging-location').val();
+          const authorId = localStorage.getItem("id");
+
+          try {
+            const data = await $.ajax({
+              url: `${BASE_URL}/lodgings`, 
+              method: "POST",
+              headers: {
+              access_token: localStorage.getItem("access_token")
+              },
+              data: {
+                name,
+                typeId,
+                facility,
+                roomCapacity,
+                price,
+                imgUrl,
+                location,
+                authorId
+              }
+            });
+            Toastify({
+              text: `Successfully added new lodging`,
+              duration: 3000,
+              close: true,
+              style: {
+                background: "#1976D2",
+              },
+              onClick: function(){} 
+            }).showToast()
+
+            $('#lodging-name').val('');
+            $('#lodging-type').val('');
+            $('#lodging-facility').val('');
+            $('#lodging-roomCapacity').val('');
+            $('#lodging-price').val('');
+            $('#lodging-imgUrl').val('');
+            $('#lodging-location').val('');
+
+            $('#dashboard-section').hide();
+            $("#home-section").show();
+            $('#sidebar-menu').show();
+            $('#lodging-section').show();
+            $('#new-lodging-section').hide();
+            $('#type-section').hide();
+            fetchLodgings()
+          } catch (err) {
+            console.log(err.responseJSON.message)
+            Toastify({
+              text: `${err.responseJSON.message}`,
+              duration: 3000,
+              close: true,
+              style: {
+                background: "red",
+              },
+              onClick: function(){} 
+            }).showToast()
+          }
+        });
+
+        //navigation-types
+        $('#nav-type').click((event) => {
+          event.preventDefault();
+
+          $('#dashboard-section').hide();
+          $("#home-section").show();
+          $('#sidebar-menu').show();
+          $('#type-section').show();
+          $('#lodging-section').hide();
+          $('#new-type-section').hide();
+          fetchTypes()
+        })
+
+        //navigation-logout
+        $('#nav-logout').click((event) => {
+          event.preventDefault();
+          localStorage.removeItem("access_token");
+
+          $("#home-section").hide();
+          $("#login-section").show();
+        })
+
+        //register form 
+        $("#register-form").submit(async (event) => {
+          event.preventDefault();
+          const username = $('#register-username').val();
+          const email = $('#register-email').val();
+          const password = $('#register-password').val();
+          const phoneNumber = $('#register-phone').val();
+          const address = $('#register-address').val();
+
+          try {
+            const data = await $.ajax({
+              url: `${BASE_URL}/register`, 
+              method: "POST",
+              data: {
+                username,
+                email,
+                password,
+                phoneNumber,
+                address
+              }
+            });
+
+            Toastify({
+              text: `${data.message + ". Please log in to continue."}`,
+              duration: 3000,
+              close: true,
+              style: {
+                background: "#1976D2",
+              },
+              onClick: function(){} // Callback after click
+            }).showToast()
+            $("#login-section").show();
+            $('#register-username').val('');
+            $('#register-email').val('');
+            $('#register-password').val('');
+            $('#register-phone').val('');
+            $('#register-address').val('');
+          } catch (err) {
+            Toastify({
+              text: `${err.responseJSON.message}`,
+              duration: 3000,
+              close: true,
+              style: {
+                background: "red",
+              },
+              onClick: function(){} 
+            }).showToast()
+            $("#login-section").show();
+            $('#register-username').val('');
+            $('#register-email').val('');
+            $('#register-password').val('');
+            $('#register-phone').val('');
+            $('#register-address').val('');
+          }
+        });
+
+        //login form
+        $("#login-form").submit(async (event) => {
+          event.preventDefault();
+          const email = $('#login-email').val();
+          const password = $('#login-password').val();
+
+          try {
+            const data = await $.ajax({
+              url: `${BASE_URL}/login`, 
+              method: "POST",
+              data: {
+                email,
+                password
+              }
+            });
+
+            localStorage.setItem("access_token", data.access_token);
+            localStorage.setItem("id", data.id);
+            localStorage.setItem("username", data.username);
+
+            $('#login-email').val('');
+            $('#login-password').val('');
+
+            $("#login-section").hide();
+            $("#home-section").show();
+            $('#sidebar-menu').show();
+            $('#dashboard-section').show();
+            dashboardSection()
+            showUser()
+          } catch (err) {
+            console.log(err)
+            Toastify({
+              text: `${err.responseJSON.message}`,
+              duration: 3000,
+              close: true,
+              style: {
+                background: "red",
+              },
+              onClick: function(){} // Callback after click
+            }).showToast()
+            $('#login-email').val('');
+            $('#login-password').val('');
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
